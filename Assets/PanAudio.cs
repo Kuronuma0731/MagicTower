@@ -10,7 +10,7 @@ public class PanAudio : MonoBehaviour
 {
     public AudioSource audioSource;  // 音源
     public Text volumeText;          // 顯示音量的 UI (可選)
-    private float panValue = 0f;      // 立體聲平衡 (-1 = 左, 1 = 右)
+    //private float panValue = 0f;      // 立體聲平衡 (-1 = 左, 1 = 右)
     public Slider volumeSlider;
 
     private float volume = 0.1f;      // 預設音量
@@ -64,11 +64,5 @@ public class PanAudio : MonoBehaviour
         {
             volumeText.text = "音量: " + Mathf.Round(volume * 100) + "%";
         }
-    }
-    void ChangeVolume()
-    {
-        volume = volumeSlider.value;
-        audioSource.volume = volume;
-        UpdateVolumeText();
     }
 }

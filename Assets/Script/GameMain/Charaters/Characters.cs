@@ -1,16 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-using UnityEngine.TextCore.Text;
-using TMPro;
-using UnityEngine.EventSystems;
-using Unity.Burst.CompilerServices;
 //步伐 x = 1 y = 1
 public class Characters : People
 {
@@ -40,6 +29,11 @@ public class Characters : People
 
     private Action<PeopleInfo> updateUI;
     //private bool isMoving = false;
+    void Awake()
+    {
+
+        
+    }
     void Start()
     {
         Lv = 1;
@@ -61,7 +55,10 @@ public class Characters : People
         {
             MainCamera.transform.position = new Vector3(0, 0, -10);
         }
+        
+        //updateUI = peopleInfo =>Debug.Log("hi");
         updateUI?.Invoke(peopleInfo);
+        Init(updateUI);
     }
 
     public void Init(Action<PeopleInfo> updateUI)
@@ -84,8 +81,18 @@ public class Characters : People
         else if (Input.GetKeyDown(KeyCode.DownArrow)) moveDirection = Vector2.down;
         else return;
 
+
+        // 取得當前位置並確保其對齊格子（強制設定為 .5 或 1.5）
+        Vector2 currentPosition = transform.position;
+
+        // 強制將 x 和 y 軸設為 .5 或 1.5
+        float targetX = Mathf.Floor(currentPosition.x) + 0.5f;
+        float targetY = Mathf.Floor(currentPosition.y) + 0.5f;
+
+
         // 檢查下一步是否為地板且不是牆壁
-        Vector2 targetPosition = (Vector2)transform.position + moveDirection;
+        Vector2 targetPosition = new Vector2(targetX, targetY) + moveDirection;
+        //Vector2 targetPosition = (Vector2)transform.position + moveDirection;
         if (IsFloor(targetPosition) && !IsWall(targetPosition))
         {
 

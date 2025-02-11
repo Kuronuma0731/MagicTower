@@ -27,7 +27,7 @@ public class BattleScript
                 return;
             }
             _monster.HP = _monster.HP - (_Characters.AttackPower - _monster.Defense);
-
+            Debug.Log(_monster.HP);
             if (_monster.HP <= 0)
             {
                 _Characters.MagicMoney += _monster.MagicMoney;

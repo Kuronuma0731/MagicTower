@@ -67,6 +67,7 @@
     <Compile Include="Assets\Script\GameMain\Charaters\People.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\OtherObjectScript.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\Characters.cs" />
+    <Compile Include="Assets\PanAudio.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\MonsterNumericalValue.cs" />
     <Compile Include="Assets\Script\Control\GameManager.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\CamareControl.cs" />
@@ -78,7 +79,6 @@
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\PlayMonster.cs" />
     <Compile Include="Assets\Script\Control\DetectObjects.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\Peoples.cs" />
-    <Compile Include="Assets\PanAudio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
