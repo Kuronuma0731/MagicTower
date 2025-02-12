@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text BlueKeyText; // Text 上的數據顯示
     [SerializeField] private Text RedKeyText; // Text 上的數據顯示
     [SerializeField] private Text MoneyText; // Text 上的數據顯示
+    [SerializeField] private Text GetMessage; // Text 上的數據顯示
 
     // 更新UI設定
     // 更新Canvas顯示
@@ -33,5 +34,10 @@ public class UIManager : MonoBehaviour
         RedKeyText.text = $" {peopleInfo.redKey}";
         MoneyText.text = $" {peopleInfo.magicMoney}";
         FloorText.text = $" {peopleInfo.currentFloor}";
+    }
+
+    public void UpdateMessage() 
+    {
+        GetMessage.text = "獲取到 " + "多少血量攻擊" ;
     }
 }

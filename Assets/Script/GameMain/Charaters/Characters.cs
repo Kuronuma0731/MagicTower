@@ -3,10 +3,12 @@ using UnityEngine;
 //步伐 x = 1 y = 1
 public class Characters : People
 {
-
+    //
+    [SerializeField] private UIManager uiMananger;
     // Change Floor  1f,2f,3f,4f,5f,
     //[SerializeField] private int currentFloor;  // 角色目前樓層，預設 1F
     [SerializeField] private Grid PeopleGrid; // 將場景中的 Grid 拖入這裡
+
 
     [SerializeField] private GameObject FloorGameObject; // 將場景中的 Floor (包含floor 1, 2, 3...)
     //[SerializeField] private Text Number_Of_AttacksText; // Text 上的數據顯示
@@ -28,12 +30,7 @@ public class Characters : People
     private bool StairsStats = true;
 
     private Action<PeopleInfo> updateUI;
-    //private bool isMoving = false;
-    void Awake()
-    {
-
-        
-    }
+    
     void Start()
     {
         Lv = 1;
@@ -194,11 +191,16 @@ public class Characters : People
             {
                 Monster monster = _Tag.GetComponent<Monster>();
                 BattleScript.StartBattle(this, monster);
+                //uiMananger.UpdateMessage();
             }
             else
             {
                 // 除了樓梯跟怪物以外的物件
                 OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
+                uiMananger.UpdateMessage();
+                
+
+
                 Destroy(_Tag.gameObject);
             }
 
