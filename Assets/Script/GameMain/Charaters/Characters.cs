@@ -5,10 +5,13 @@ public class Characters : People
 {
     //
     [SerializeField] private UIManager uiMananger;
+
+    //Control Animtor
+    [SerializeField] private Animation Character_Animation;
+    
     // Change Floor  1f,2f,3f,4f,5f,
     //[SerializeField] private int currentFloor;  // 角色目前樓層，預設 1F
     [SerializeField] private Grid PeopleGrid; // 將場景中的 Grid 拖入這裡
-
 
     [SerializeField] private GameObject FloorGameObject; // 將場景中的 Floor (包含floor 1, 2, 3...)
     //[SerializeField] private Text Number_Of_AttacksText; // Text 上的數據顯示

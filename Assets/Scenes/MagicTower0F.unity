@@ -1115,11 +1115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5081563980015777340, guid: 0fafda6ce698fe848817a6bc874072a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.07
+      value: 7.92
       objectReference: {fileID: 0}
     - target: {fileID: 5081563980015777340, guid: 0fafda6ce698fe848817a6bc874072a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.81
+      value: -7.78
       objectReference: {fileID: 0}
     - target: {fileID: 5081563980015777340, guid: 0fafda6ce698fe848817a6bc874072a4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2149,6 +2149,8 @@ MonoBehaviour:
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 1
+  uiMananger: {fileID: 1067808915}
+  Character_Animation: {fileID: 0}
   PeopleGrid: {fileID: 693703412}
   FloorGameObject: {fileID: 1872404203}
   MainCamera: {fileID: 519420031}
@@ -18218,7 +18220,7 @@ Animator:
   m_GameObject: {fileID: 1067808909}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e34574cfd29edf242b049d5bd13bfb3e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 294396d85506c3144a9eb9d2ab38e02b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -18314,6 +18316,7 @@ MonoBehaviour:
   BlueKeyText: {fileID: 627464541}
   RedKeyText: {fileID: 1795038447}
   MoneyText: {fileID: 1628710647}
+  GetMessage: {fileID: 1645930270}
 --- !u!4 &1069868766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8473424871779158395, guid: 9c06867d48198ea4cbee3fd996689ddf, type: 3}
@@ -28157,7 +28160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1645930271
 CanvasRenderer:
   m_ObjectHideFlags: 0
