@@ -8,7 +8,7 @@ public class Characters : People
 
     //Control Animtor
     [SerializeField] private Animation Character_Animation;
-    
+
     // Change Floor  1f,2f,3f,4f,5f,
     //[SerializeField] private int currentFloor;  // 角色目前樓層，預設 1F
     [SerializeField] private Grid PeopleGrid; // 將場景中的 Grid 拖入這裡
@@ -33,7 +33,7 @@ public class Characters : People
     private bool StairsStats = true;
 
     private Action<PeopleInfo> updateUI;
-    
+
     void Start()
     {
         Lv = 1;
@@ -55,7 +55,7 @@ public class Characters : People
         {
             MainCamera.transform.position = new Vector3(0, 0, -10);
         }
-        
+
         //updateUI = peopleInfo =>Debug.Log("hi");
         updateUI?.Invoke(peopleInfo);
         Init(updateUI);
@@ -69,8 +69,10 @@ public class Characters : People
     private void Update()
     {
         CharacterGridMove();
+       
         //updateUI?.Invoke(peopleInfo);
     }
+    
 
     void CharacterGridMove()
     {
@@ -199,11 +201,12 @@ public class Characters : People
             else
             {
                 // 除了樓梯跟怪物以外的物件
-                OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
-                uiMananger.UpdateMessage();
-                
+                string OtherText = OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
 
-
+                if (OtherText != null && OtherText != "")
+                {
+                    uiMananger.UpdateMessage(OtherText);
+                }
                 Destroy(_Tag.gameObject);
             }
 

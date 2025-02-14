@@ -18,6 +18,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text MoneyText; // Text 上的數據顯示
     [SerializeField] private Text GetMessage; // Text 上的數據顯示
 
+    [SerializeField] private GameObject itemImage;
+    [SerializeField] private GameObject itemDescriptionText;
+
+    private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
+    public void Update()
+    {
+        CloseUI();
+    }
     // 更新UI設定
     // 更新Canvas顯示
     public void UpdateStatusUI(PeopleInfo peopleInfo)
@@ -36,8 +44,22 @@ public class UIManager : MonoBehaviour
         FloorText.text = $" {peopleInfo.currentFloor}";
     }
 
-    public void UpdateMessage() 
+    public void UpdateMessage(string OtherText)
     {
-        GetMessage.text = "獲取到 " + "多少血量攻擊" ;
+        isUIVisible = true;
+        itemImage.SetActive(isUIVisible);
+        itemDescriptionText.SetActive(isUIVisible);
+        GetMessage.text = OtherText;
+    }
+
+    void CloseUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))//Input Enter
+        {
+            isUIVisible = !isUIVisible;
+
+            itemImage.SetActive(isUIVisible);
+            itemDescriptionText.SetActive(isUIVisible);
+        }
     }
 }
