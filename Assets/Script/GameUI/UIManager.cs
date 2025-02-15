@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject itemDescriptionText;
 
     private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
+
+
     public void Update()
     {
         CloseUI();
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMessage(string OtherText)
     {
+        // 顯示UI 為True
         isUIVisible = true;
         itemImage.SetActive(isUIVisible);
         itemDescriptionText.SetActive(isUIVisible);
@@ -56,10 +59,17 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))//Input Enter
         {
-            isUIVisible = !isUIVisible;
-
-            itemImage.SetActive(isUIVisible);
-            itemDescriptionText.SetActive(isUIVisible);
+            //Debug.Log(isUIVisible);
+            // isUIVisible 已開啟所以關閉
+            if (isUIVisible == true)
+            {
+                //切換成false 下面才會更動
+                isUIVisible = !isUIVisible;
+                itemImage.SetActive(isUIVisible);
+                itemDescriptionText.SetActive(isUIVisible);
+                
+               
+            }
         }
     }
 }

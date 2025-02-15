@@ -69,7 +69,6 @@ public class Characters : People
     private void Update()
     {
         CharacterGridMove();
-       
         //updateUI?.Invoke(peopleInfo);
     }
     
