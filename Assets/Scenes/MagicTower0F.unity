@@ -18065,6 +18065,7 @@ MonoBehaviour:
   volumeText: {fileID: 497512790}
   volumeImage: {fileID: 1551666515}
   Characters: {fileID: 245907435}
+  buttonEvent: {fileID: 997087888}
 --- !u!1001 &1013927050
 PrefabInstance:
   m_ObjectHideFlags: 0
