@@ -5,21 +5,13 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Text FloorText; // Text 上的數據顯示
-    [SerializeField] private Text LvText;
-    [SerializeField] private Text HpText; // Text 上的數據顯示
-    [SerializeField] private Text AttackPowerText; // Text 上的數據顯示
-    [SerializeField] private Text DefenseText; // Text 上的數據顯示
-    [SerializeField] private Text AgileText; // Text 上的數據顯示
-    [SerializeField] private Text Experience_ValueText; // Text 上的數據顯示
-    [SerializeField] private Text YellowKey_Text; // Text 上的數據顯示
-    [SerializeField] private Text BlueKeyText; // Text 上的數據顯示
-    [SerializeField] private Text RedKeyText; // Text 上的數據顯示
-    [SerializeField] private Text MoneyText; // Text 上的數據顯示
-    [SerializeField] private Text GetMessage; // Text 上的數據顯示
-
+    // UI 使用狀態更新
+    [SerializeField] private UIInfo UIStatesText;
     [SerializeField] private GameObject itemImage;
     [SerializeField] private GameObject itemDescriptionText;
+
+    ////設定戰鬥UI顯示與隱藏狀態
+    private bool isUiBallteState = false;
 
     private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
 
@@ -33,17 +25,17 @@ public class UIManager : MonoBehaviour
     public void UpdateStatusUI(PeopleInfo peopleInfo)
     {
         //FloorText.text = $"{peopleInfo.currentFloor} 樓";
-        LvText.text = $"等級:{peopleInfo.lvevl}";
-        HpText.text = $"生命: {peopleInfo.hp}";
-        AttackPowerText.text = $"攻擊力: {peopleInfo.attackPower}";
-        DefenseText.text = $"防禦力: {peopleInfo.defense}";
-        AgileText.text = $"敏捷: {peopleInfo.agile}";
-        Experience_ValueText.text = $"經驗: {peopleInfo.experience_Value}";
-        YellowKey_Text.text = $" {peopleInfo.yellowKey}";
-        BlueKeyText.text = $" {peopleInfo.blueKey}";
-        RedKeyText.text = $" {peopleInfo.redKey}";
-        MoneyText.text = $" {peopleInfo.magicMoney}";
-        FloorText.text = $" {peopleInfo.currentFloor}";
+        UIStatesText.LvText.text = $"等級:{peopleInfo.lvevl}";
+        UIStatesText.HpText.text = $"生命: {peopleInfo.hp}";
+        UIStatesText.AttackPowerText.text = $"攻擊力: {peopleInfo.attackPower}";
+        UIStatesText.DefenseText.text = $"防禦力: {peopleInfo.defense}";
+        UIStatesText.AgileText.text = $"敏捷: {peopleInfo.agile}";
+        UIStatesText.Experience_ValueText.text = $"經驗: {peopleInfo.experience_Value}";
+        UIStatesText.YellowKey_Text.text = $" {peopleInfo.yellowKey}";
+        UIStatesText.BlueKeyText.text = $" {peopleInfo.blueKey}";
+        UIStatesText.RedKeyText.text = $" {peopleInfo.redKey}";
+        UIStatesText.MoneyText.text = $" {peopleInfo.magicMoney}";
+        UIStatesText.FloorText.text = $" {peopleInfo.currentFloor}";
     }
 
     public void UpdateMessage(string OtherText)
@@ -52,7 +44,7 @@ public class UIManager : MonoBehaviour
         isUIVisible = true;
         itemImage.SetActive(isUIVisible);
         itemDescriptionText.SetActive(isUIVisible);
-        GetMessage.text = OtherText;
+        UIStatesText.GetMessage.text = OtherText;
     }
 
     void CloseUI()
@@ -67,8 +59,8 @@ public class UIManager : MonoBehaviour
                 isUIVisible = !isUIVisible;
                 itemImage.SetActive(isUIVisible);
                 itemDescriptionText.SetActive(isUIVisible);
-                
-               
+
+
             }
         }
     }

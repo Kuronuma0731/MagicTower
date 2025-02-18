@@ -81,6 +81,7 @@
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\Peoples.cs" />
     <Compile Include="Assets\Script\Control\Other\VoiceControl.cs" />
     <Compile Include="Assets\Script\GameUI\VolumeControls.cs" />
+    <Compile Include="Assets\Script\GameUI\UIInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
