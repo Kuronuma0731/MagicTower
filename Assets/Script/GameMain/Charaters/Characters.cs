@@ -31,7 +31,8 @@ public class Characters : People
 
     // 樓梯狀態讀取
     private bool StairsStats = true;
-
+    // 移動讀取
+    private bool canMove = true;
     private Action<PeopleInfo> updateUI;
 
     void Start()
@@ -71,10 +72,11 @@ public class Characters : People
         CharacterGridMove();
         //updateUI?.Invoke(peopleInfo);
     }
-    
+
 
     void CharacterGridMove()
     {
+        if (!canMove) {  return; }
         // 獲取玩家輸入（上下左右）
         if (Input.GetKeyDown(KeyCode.UpArrow)) moveDirection = Vector2.up;
         else if (Input.GetKeyDown(KeyCode.RightArrow)) moveDirection = Vector2.right;
@@ -219,5 +221,17 @@ public class Characters : People
 
 
     }
+
+
+    // 設定是否可以動作
+    public void SetCanMove(bool Move)
+    {
+        canMove = Move;
+    }
+
+
+
+
+
 
 }
