@@ -10,22 +10,29 @@ using UnityEngine.Rendering;
 public class BattleScript
 {
     //private Action<PeopleInfo> updateUI;
-    public static void StartBattle(Characters _Characters, Monster _monster)
+    public static void StartBattle(Characters _Characters, Monster _monster,UIManager uIManager)
     {
+        
+
         // 邏輯順序為
         // hero and monster 
         // hero 先被攻擊 on motsters to attack
         // 可以判斷怪物 再放入音效
-        
+
         while (_Characters != null && _monster != null)
         {
             _Characters.HP = _Characters.HP - (_monster.AttackPower - _Characters.Defense);
-            Debug.Log(_Characters.HP);
+
             if (_Characters.HP <= 0)
             {
-               
+                UIManager.UpdateBattleUI(_Characters, _monster, uIManager);
                 return;
             }
+
+            UIManager.UpdateBattleUI(_Characters, _monster, uIManager);
+
+
+
             _monster.HP = _monster.HP - (_Characters.AttackPower - _monster.Defense);
             Debug.Log(_monster.HP);
             if (_monster.HP <= 0)
@@ -36,6 +43,7 @@ public class BattleScript
 
                 return;
             }
+            UIManager.UpdateBattleUI(_Characters, _monster, uIManager);
         }
     }
 }

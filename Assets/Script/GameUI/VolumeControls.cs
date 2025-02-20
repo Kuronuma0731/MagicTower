@@ -59,7 +59,6 @@ public class VolumeControls : MonoBehaviour
     // °»´ú«ö¶s°Ê§@
     void ToggleCharacterMovement()
     {
-
         canMove = !canMove;
         Characters.SetCanMove(canMove);
     }

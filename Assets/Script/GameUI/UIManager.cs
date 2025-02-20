@@ -9,12 +9,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIInfo UIStatesText;
     [SerializeField] private GameObject itemImage;
     [SerializeField] private GameObject itemDescriptionText;
+    [SerializeField] private GameObject uiBattleBackGrand;
+    //
+    [SerializeField] private Characters _Characters;
+    //
 
     ////設定戰鬥UI顯示與隱藏狀態
     private bool isUiBallteState = false;
 
     private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
-
 
     public void Update()
     {
@@ -35,7 +38,7 @@ public class UIManager : MonoBehaviour
         UIStatesText.BlueKeyText.text = $" {peopleInfo.blueKey}";
         UIStatesText.RedKeyText.text = $" {peopleInfo.redKey}";
         UIStatesText.MoneyText.text = $" {peopleInfo.magicMoney}";
-        UIStatesText.FloorText.text = $" {peopleInfo.currentFloor}";
+        //UIStatesText.FloorText.text = $" {peopleInfo.currentFloor}";
     }
 
     public void UpdateMessage(string OtherText)
@@ -45,6 +48,27 @@ public class UIManager : MonoBehaviour
         itemImage.SetActive(isUIVisible);
         itemDescriptionText.SetActive(isUIVisible);
         UIStatesText.GetMessage.text = OtherText;
+    }
+
+    public static void UpdateBattleUI(Characters characters, Monster monster, UIManager uIManager)
+    {
+
+        // Update Text
+        uIManager.UIStatesText.BattleCh_Hp.text = $"生命 :{characters.HP}";
+        uIManager.UIStatesText.BattleCh_Attack.text = $"攻擊力 : {characters.AttackPower}";
+        uIManager.UIStatesText.BattleCh_Den.text = $"防禦力 : {characters.Defense}";
+        uIManager.UIStatesText.BattleCh_Aglie.text = $"敏捷 : {characters.Agile}";
+        uIManager.UIStatesText.BattleM_Hp.text = $"生命 : {monster.HP}";
+        uIManager.UIStatesText.BattleM_Attack.text = $"攻擊力 : {monster.AttackPower}";
+        uIManager.UIStatesText.BattleM_Den.text = $"防禦力 : {monster.Defense}";
+        uIManager.UIStatesText.BattleM_Aglie.text = $"敏捷 : {monster.Agile}";
+
+    }
+
+    public void ShowBattleUI()
+    {
+        isUiBallteState = !isUiBallteState;
+        uiBattleBackGrand.SetActive(isUiBallteState);
     }
 
     void CloseUI()
@@ -59,8 +83,15 @@ public class UIManager : MonoBehaviour
                 isUIVisible = !isUIVisible;
                 itemImage.SetActive(isUIVisible);
                 itemDescriptionText.SetActive(isUIVisible);
+                _Characters.SetCanMove(true);
+            }
 
-
+            if (isUiBallteState == true)
+            {
+                // 切換成false 下面才更動
+                isUiBallteState = !isUiBallteState;
+                uiBattleBackGrand.SetActive(isUiBallteState);
+                _Characters.SetCanMove(true);
             }
         }
     }

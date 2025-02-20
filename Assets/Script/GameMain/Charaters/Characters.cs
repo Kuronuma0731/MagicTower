@@ -14,7 +14,6 @@ public class Characters : People
     [SerializeField] private Grid PeopleGrid; // 將場景中的 Grid 拖入這裡
 
     [SerializeField] private GameObject FloorGameObject; // 將場景中的 Floor (包含floor 1, 2, 3...)
-    //[SerializeField] private Text Number_Of_AttacksText; // Text 上的數據顯示
     [SerializeField] private Camera MainCamera;
     [SerializeField] private int Characters_Gold;
     [SerializeField] public LayerMask floorLayer; // 地e層
@@ -76,7 +75,7 @@ public class Characters : People
 
     void CharacterGridMove()
     {
-        if (!canMove) {  return; }
+        if (!canMove) { return; }
         // 獲取玩家輸入（上下左右）
         if (Input.GetKeyDown(KeyCode.UpArrow)) moveDirection = Vector2.up;
         else if (Input.GetKeyDown(KeyCode.RightArrow)) moveDirection = Vector2.right;
@@ -196,14 +195,16 @@ public class Characters : People
             else if (_Tag.gameObject.tag == "Monster")
             {
                 Monster monster = _Tag.GetComponent<Monster>();
-                BattleScript.StartBattle(this, monster);
-                //uiMananger.UpdateMessage();
+                uiMananger.ShowBattleUI();
+                SetCanMove(false);
+                BattleScript.StartBattle(this, monster, uiMananger);
+
             }
             else
             {
                 // 除了樓梯跟怪物以外的物件
                 string OtherText = OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
-
+                SetCanMove(false);
                 if (OtherText != null && OtherText != "")
                 {
                     uiMananger.UpdateMessage(OtherText);
@@ -227,6 +228,7 @@ public class Characters : People
     public void SetCanMove(bool Move)
     {
         canMove = Move;
+        Debug.Log(canMove);
     }
 
 
