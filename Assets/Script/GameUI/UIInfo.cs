@@ -6,23 +6,23 @@ using UnityEngine.UI;
 [Serializable]
 public class UIInfo 
 {
-    public Text FloorText; // Text 上的數據顯示
-    public Text LvText;
-    public Text HpText; // Text 上的數據顯示
-    public Text AttackPowerText; // Text 上的數據顯示
-    public Text DefenseText; // Text 上的數據顯示
-    public Text AgileText; // Text 上的數據顯示
-    public Text Experience_ValueText; // Text 上的數據顯示
-    public Text YellowKey_Text; // Text 上的數據顯示
-    public Text BlueKeyText; // Text 上的數據顯示
-    public Text RedKeyText; // Text 上的數據顯示
-    public Text MoneyText; // Text 上的數據顯示
-    public Text GetMessage; // Text 上的數據顯示
-
+    public Text FloorText; // 樓層上的數據顯示
+    public Text LvText;    // 等級的數據顯示
+    public Text HpText; // 腳色血量 上的數據顯示
+    public Text AttackPowerText; // 腳色攻擊力 上的數據顯示
+    public Text DefenseText; // 腳色防禦力 上的數據顯示
+    public Text AgileText; // 腳色敏捷 上的數據顯示
+    public Text Experience_ValueText; // 腳色經驗 上的數據顯示
+    public Text YellowKey_Text; // 黃鑰匙數量 上的數據顯示
+    public Text BlueKeyText; // 藍鑰匙數量 上的數據顯示
+    public Text RedKeyText; // 紅鑰匙數量 上的數據顯示
+    public Text MoneyText; // 錢 上的數據顯示
+    public Text GetMessage; // 顯示獲得訊息 上的數據顯示
+    public Text ShowEnterSure;//顯示 按下Enter通知
 
     // 戰鬥數值顯示 
     // 怪物顯示
-    public Text BattleM_Name;
+    public Text BattleM_Name; 
     public Text BattleM_Hp;
     public Text BattleM_Attack;
     public Text BattleM_Den;

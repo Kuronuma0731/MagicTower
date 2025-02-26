@@ -36,6 +36,7 @@ public class Characters : People
 
     void Start()
     {
+        //腳色設定值
         Lv = 1;
         HP = 1000;
         AttackPower = 10;
@@ -50,13 +51,12 @@ public class Characters : People
         CurrentFloor = 0;
 
         RigidbodyCharacters.freezeRotation = true;
-
+        uiMananger.ShowFloor(CurrentFloor);
         if (MainCamera != null)
         {
             MainCamera.transform.position = new Vector3(0, 0, -10);
         }
 
-        //updateUI = peopleInfo =>Debug.Log("hi");
         updateUI?.Invoke(peopleInfo);
         Init(updateUI);
     }
@@ -69,7 +69,6 @@ public class Characters : People
     private void Update()
     {
         CharacterGridMove();
-        //updateUI?.Invoke(peopleInfo);
     }
 
 
@@ -136,7 +135,6 @@ public class Characters : People
         Vector3Int cellPosition = PeopleGrid.WorldToCell(transform.position);
         Vector3 worldPosition = PeopleGrid.CellToWorld(cellPosition);
         PeoplepositionStats = worldPosition;
-        Debug.Log(PeoplepositionStats);
         yield return null;
     }
 
@@ -163,8 +161,6 @@ public class Characters : People
 
     private void OnTriggerEnter2D(Collider2D _Tag)
     {
-        //Debug.Log(_Tag.tag);
-        //Debug.Log(_Tag.name);
         try
         {
             //Debug.Log("Monster");
@@ -178,6 +174,7 @@ public class Characters : People
                         {
                             CurrentFloor = CurrentFloor + 1;
                             StairsStats = ChangeFloor.SetFloorStats(CurrentFloor, MainCamera, _Tag, gameObject, FloorGameObject, "GoDownStairs", wallLayer);
+                            uiMananger.ShowFloor(CurrentFloor);
                         }
                         break;
                     case "GoDownStairs":
@@ -185,6 +182,7 @@ public class Characters : People
                         {
                             CurrentFloor = CurrentFloor - 1;
                             StairsStats = ChangeFloor.SetFloorStats(CurrentFloor, MainCamera, _Tag, gameObject, FloorGameObject, "GoUpStairs", wallLayer);
+                            uiMananger.ShowFloor(CurrentFloor);
                         }
                         break;
                     default:
@@ -204,11 +202,18 @@ public class Characters : People
             {
                 // 除了樓梯跟怪物以外的物件
                 string OtherText = OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
+                //
                 SetCanMove(false);
                 if (OtherText != null && OtherText != "")
                 {
                     uiMananger.UpdateMessage(OtherText);
                 }
+                //偵測到門的時候 因無法有東西判斷移動 所以 增加改成字串空白""
+                if (OtherText == "")
+                {
+                    SetCanMove(true);
+                }
+                //最後才執行刪除
                 Destroy(_Tag.gameObject);
             }
 

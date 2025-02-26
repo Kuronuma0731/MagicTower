@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject itemImage;
     [SerializeField] private GameObject itemDescriptionText;
     [SerializeField] private GameObject uiBattleBackGrand;
-    //
+    [SerializeField] private GameObject uiShowEnterSure;//
     [SerializeField] private Characters _Characters;
     //
 
@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
     // 更新Canvas顯示
     public void UpdateStatusUI(PeopleInfo peopleInfo)
     {
-        //FloorText.text = $"{peopleInfo.currentFloor} 樓";
         UIStatesText.LvText.text = $"等級:{peopleInfo.lvevl}";
         UIStatesText.HpText.text = $"生命: {peopleInfo.hp}";
         UIStatesText.AttackPowerText.text = $"攻擊力: {peopleInfo.attackPower}";
@@ -38,18 +37,7 @@ public class UIManager : MonoBehaviour
         UIStatesText.BlueKeyText.text = $" {peopleInfo.blueKey}";
         UIStatesText.RedKeyText.text = $" {peopleInfo.redKey}";
         UIStatesText.MoneyText.text = $" {peopleInfo.magicMoney}";
-        //UIStatesText.FloorText.text = $" {peopleInfo.currentFloor}";
     }
-
-    public void UpdateMessage(string OtherText)
-    {
-        // 顯示UI 為True
-        isUIVisible = true;
-        itemImage.SetActive(isUIVisible);
-        itemDescriptionText.SetActive(isUIVisible);
-        UIStatesText.GetMessage.text = OtherText;
-    }
-
     public static void UpdateBattleUI(Characters characters, Monster monster, UIManager uIManager)
     {
 
@@ -64,12 +52,32 @@ public class UIManager : MonoBehaviour
         uIManager.UIStatesText.BattleM_Aglie.text = $"敏捷 : {monster.Agile}";
 
     }
+    public void UpdateMessage(string OtherText)
+    {
+        // 顯示UI 為True
+        isUIVisible = true;
+        // 照片顯示
+        itemImage.SetActive(isUIVisible);
+        //
+        itemDescriptionText.SetActive(isUIVisible);
+        UIStatesText.GetMessage.text = OtherText;
+
+        uiShowEnterSure.SetActive(isUIVisible);
+    }
+
+   
 
     public void ShowBattleUI()
     {
         isUiBallteState = !isUiBallteState;
         uiBattleBackGrand.SetActive(isUiBallteState);
+        uiShowEnterSure.SetActive(isUiBallteState);
     }
+    public void ShowFloor(int Floor)
+    {
+        UIStatesText.FloorText.text = $"{Floor}樓";
+    }
+
 
     void CloseUI()
     {
@@ -83,14 +91,16 @@ public class UIManager : MonoBehaviour
                 isUIVisible = !isUIVisible;
                 itemImage.SetActive(isUIVisible);
                 itemDescriptionText.SetActive(isUIVisible);
+                uiShowEnterSure.SetActive(isUIVisible);
                 _Characters.SetCanMove(true);
             }
-
+            // 關閉戰鬥畫面
             if (isUiBallteState == true)
             {
                 // 切換成false 下面才更動
                 isUiBallteState = !isUiBallteState;
                 uiBattleBackGrand.SetActive(isUiBallteState);
+                uiShowEnterSure.SetActive(isUIVisible);
                 _Characters.SetCanMove(true);
             }
         }
