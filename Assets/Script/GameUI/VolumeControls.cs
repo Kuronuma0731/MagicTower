@@ -17,7 +17,7 @@ public class VolumeControls : MonoBehaviour
 
     private void Start()
     {
-        volumeImage.gameObject.SetActive(!volumeImage.gameObject.activeSelf);
+        volumeImage.gameObject.SetActive(false);//!volumeImage.gameObject.activeSelf
         // Set up 
         volumSlider.value = AudioListener.volume;
         volumeText.text = $"­µ¶q: 100 % ";

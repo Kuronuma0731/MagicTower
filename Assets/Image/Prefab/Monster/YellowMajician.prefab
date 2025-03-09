@@ -113,7 +113,7 @@ MonoBehaviour:
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: YellowMajiician
+  MonsterName: YellowMajician
 --- !u!95 &301176439130563670
 Animator:
   serializedVersion: 5

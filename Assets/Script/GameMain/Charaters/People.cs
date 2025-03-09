@@ -73,7 +73,7 @@ public class People : MonoBehaviour
     public int MagicMoney
     {
         get => peopleInfo.magicMoney;
-        set => peopleInfo.magicMoney = value;
+        set => peopleInfo.magicMoney = Mathf.Max(value);
     }
     public Vector3 PeoplepositionStats
     {
@@ -91,7 +91,6 @@ public class People : MonoBehaviour
     }
     public virtual void CloseObject(string ObjectName, Characters _Characters)
     {
-        //Destroy(this.gameObject);
 
 
     }

@@ -13,13 +13,15 @@ public static class MonsterNumericalValue
             { "RedSlime", (66, 20, 4, 2, 1, 1,2) },
             { "BlackSlime", (80, 37, 9, 0, 1, 1,5) },
             { "SlimeKing", (172, 130, 60, 2, 2, 1,19) },
+            { "SlimeMan", (90, 130, 60, 15, 2, 1,8) },
             //Bat
             { "SmallBat", (45, 32, 2, 4, 1, 1,3) },
             { "BigBat", (66, 55, 4, 2, 1, 2,6) },
             { "RedBat", (210, 185, 70, 4, 3, 3,23) },
             //Majician
             { "BlueMajician", (70, 10, 5, 0, 1, 1,4) },
-
+            { "YellowMajician", (70, 10, 5, 0, 1, 1,4) },
+            { "RedMajician", (70, 10, 5, 0, 1, 1,4) },
             //Zombie
             { "Zombie", (190, 90, 33, 2, 2, 1,4) },
             //Guard
@@ -38,8 +40,8 @@ public static class MonsterNumericalValue
             { "SwordMan", (280, 210, 110, 4, 4, 1,34) },
             //Sketeton
             { "Skeleton", (95, 70, 0, 0, 1, 1,5) },
-            { "SketetonSwordMan", (190, 100, 5, 3, 2, 1,13) },
-            { "MedievalSketetonSwordMan", (290, 170, 23, 3, 2, 1,21) },
+            { "SkeletonSwordsman", (190, 100, 5, 3, 2, 1,13) },
+            { "MedievalSkeletonSwordsman", (290, 170, 23, 3, 2, 1,21) },
             //
         };
 

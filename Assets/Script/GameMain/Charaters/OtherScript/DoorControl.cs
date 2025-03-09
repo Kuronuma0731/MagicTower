@@ -9,23 +9,7 @@ public class DoorControl : People
     [SerializeField] private Animator Door_Animator;
     //[SerializeField] private Grid Door_Grid;
 
-    private void Start()
-    {
-        //Door_Animator = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        // Test OpenDoor
-        //if (Door_Animator != null)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.O)) 
-        //    {
-        //        Door_Animator.SetTrigger("Open");
-        //    }
-        //}
-    }
-    //void ont
+    
     public override void CloseObject(string ObjectName, Characters _Characters)
     {
         Debug.Log("ObjectName" + ObjectName + _Characters.YellowKey);
@@ -45,15 +29,15 @@ public class DoorControl : People
                 if (_Characters.BlueKey != 0)
                 {
                     _Characters.BlueKey -= 1;
-
+                    Door_Animator.SetTrigger("Open");
                 }
                 break;
             case "RedKey":
                 if (_Characters.RedKey != 0)
                 {
                     _Characters.RedKey -= 1;
+                    Door_Animator.SetTrigger("Open");
 
-                 
                 }
                 break;
 
@@ -61,10 +45,6 @@ public class DoorControl : People
         //Door_Animator.SetTrigger("Open");
 
         //Destroy(gameObject);
-    }
-    void OnAnimationComplete() 
-    {
-        Destroy(gameObject);
     }
 }
 

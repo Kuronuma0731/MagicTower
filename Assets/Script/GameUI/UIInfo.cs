@@ -33,4 +33,17 @@ public class UIInfo
     public Text BattleCh_Attack;
     public Text BattleCh_Den;
     public Text BattleCh_Aglie;
+    //買東西顯示
+    public Image BuyImage;
+    public Text BuyText;
+    public Button BuyButton1;
+    public Button BuyButton2;
+    public Button BuyButton3;
+    public Button BuyButton4;
+    public Text BuyBtnText1;
+    public Text BuyBtnText2;
+    public Text BuyBtnText3;
+    public Text BuyBtnText4;
+    //
+    
 }

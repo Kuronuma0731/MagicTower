@@ -7,7 +7,7 @@ public class Characters : People
     [SerializeField] private UIManager uiMananger;
 
     //Control Animtor
-    [SerializeField] private Animation Character_Animation;
+    [SerializeField] private Animator Character_Animator;
 
     // Change Floor  1f,2f,3f,4f,5f,
     //[SerializeField] private int currentFloor;  // 角色目前樓層，預設 1F
@@ -36,6 +36,7 @@ public class Characters : People
 
     void Start()
     {
+
         //腳色設定值
         Lv = 1;
         HP = 1000;
@@ -47,7 +48,7 @@ public class Characters : People
         YellowKey = 1;
         BlueKey = 1;
         RedKey = 1;
-        MagicMoney = 0;
+        MagicMoney = 200;
         CurrentFloor = 0;
 
         RigidbodyCharacters.freezeRotation = true;
@@ -88,7 +89,7 @@ public class Characters : People
 
         // 強制將 x 和 y 軸設為 .5 或 1.5
         float targetX = Mathf.Floor(currentPosition.x) + 0.5f;
-        float targetY = Mathf.Floor(currentPosition.y) + 0.5f;
+        float targetY = Mathf.Floor(currentPosition .y) + 0.5f;
 
 
         // 檢查下一步是否為地板且不是牆壁
@@ -131,6 +132,28 @@ public class Characters : People
     private System.Collections.IEnumerator MoveToNextGrid(Vector2 targetPosition)
     {
         transform.position = targetPosition;
+
+        if (moveDirection == Vector2.up)
+        {
+            Character_Animator.SetTrigger("PlayUp");
+            //Character_Animator.speed = 0;
+        }
+        else if (moveDirection == Vector2.right)
+        {
+            Character_Animator.SetTrigger("PlayRight");
+            //Character_Animator.speed = 0;
+        }
+        else if (moveDirection == Vector2.left)
+        {
+            Character_Animator.SetTrigger("PlayLeft");
+            //Character_Animator.speed = 0;
+        }
+        else if (moveDirection == Vector2.down)
+        {
+            Character_Animator.SetTrigger("PlayDown");
+            //Character_Animator.speed = 0;
+        }
+
         //紀錄 當下位置
         Vector3Int cellPosition = PeopleGrid.WorldToCell(transform.position);
         Vector3 worldPosition = PeopleGrid.CellToWorld(cellPosition);
@@ -198,6 +221,11 @@ public class Characters : People
                 BattleScript.StartBattle(this, monster, uiMananger);
 
             }
+            else if (_Tag.gameObject.name == "Mask") 
+            {
+                //
+                uiMananger.ShowSkillUi(1);
+            }
             else
             {
                 // 除了樓梯跟怪物以外的物件
@@ -227,7 +255,16 @@ public class Characters : People
 
 
     }
-
+    public void UpMaskHeroStates(int heroLv, int heroHp, int heroAttack, int heroDefense, int Buymoney)
+    {
+        Lv += heroLv;
+        HP += heroHp;
+        AttackPower += heroAttack;
+        Defense += heroDefense;
+        MagicMoney -= Buymoney;
+        //Update Ui
+        updateUI?.Invoke(peopleInfo);
+    }
 
     // 設定是否可以動作
     public void SetCanMove(bool Move)
@@ -237,7 +274,7 @@ public class Characters : People
     }
 
 
-
+   
 
 
 

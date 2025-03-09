@@ -134,7 +134,7 @@ MonoBehaviour:
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: MedievalSkeletonSwordsMan
+  MonsterName: MedievalSkeletonSwordsman
 --- !u!61 &2238234730753050290
 BoxCollider2D:
   m_ObjectHideFlags: 0
