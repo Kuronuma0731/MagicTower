@@ -127,14 +127,12 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: SmallBat
+  MonsterName: 0
+  monsterSprite: {fileID: -1249684677, guid: f374a6fd679d77f4dbf69949c5fb8552, type: 3}
 --- !u!61 &4969888134573581282
 BoxCollider2D:
   m_ObjectHideFlags: 0

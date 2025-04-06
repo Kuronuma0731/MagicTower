@@ -106,14 +106,12 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: SkeletonSwordsMan
+  MonsterName: 0
+  monsterSprite: {fileID: 927021002, guid: 38f22ee7e4ab6084cbda37ad1aa2c3df, type: 3}
 --- !u!95 &4545846736055055252
 Animator:
   serializedVersion: 5

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5081563980015777340}
   - component: {fileID: 5081563980015777331}
   - component: {fileID: 5081563980015777341}
+  - component: {fileID: 1299395564728712989}
   m_Layer: 0
   m_Name: Defence_Potion
-  m_TagString: Untagged
+  m_TagString: Other
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,5 +110,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.95, y: 0.95}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &1299395564728712989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081563980015777330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41aab408109c4e04aa95beb7c6532a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherArticle: 4

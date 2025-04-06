@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
    // func<int,string> 傳 任何東西進去 int , return string (任何東西出來)
     void Start()
     {
-        characters.Init(uiManager.UpdateStatusUI);
+        EventHander.CallUpdateUiEvent(characters.peopleInfo);
     }
 
 

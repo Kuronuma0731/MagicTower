@@ -153,11 +153,9 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: SilmeKing
+  MonsterName: 0
+  monsterSprite: {fileID: -1278770402, guid: f5a98c7799a5b544ea7226671d751026, type: 3}

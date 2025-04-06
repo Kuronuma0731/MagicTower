@@ -108,15 +108,10 @@ public class ChangeFloor
             if (child.name.Contains(StairsStates))
             {
                 gameObjects.Add(child.gameObject);
-                //Debug.Log("Found child: " + child.gameObject.name);
 
             }
-            //GameObject[] childObjects = GetAllFloorObject(child);
-            //gameObjects.AddRange(childObjects); // 將遞迴結果加入 List
         }
         return gameObjects.ToArray();
-        // 遞迴檢索嵌套的子物件
-
     }
 }
 

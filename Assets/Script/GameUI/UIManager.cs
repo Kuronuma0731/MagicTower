@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     // UI 使用狀態更新
     [SerializeField] private UIInfo UIStatesText;
-    [SerializeField] private GameObject itemImage;
+    [SerializeField] private GameObject GetImage;
     [SerializeField] private GameObject itemDescriptionText;
     [SerializeField] private GameObject uiBattleBackGrand;
-    //
+    
     [SerializeField] private Characters _Characters;
     //
 
@@ -18,58 +23,104 @@ public class UIManager : MonoBehaviour
     private bool isUiBallteState = false;
 
     private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
+    //private bool isUISkill = false; // 控制 UI 顯示與隱藏的狀態
 
+
+    private void OnEnable()
+    {
+        EventHander.UpdateArticleUIEvent += UpdateArticleUI;
+        EventHander.UpdateUiEvent += UpdateStatusUI;
+        EventHander.UpdateMessageEvent += UpdateMessage;
+        EventHander.UpdateBattleEvent += ShowBattleUI;
+        EventHander.UpdateBattleUIEvent += UpdateBattleUI;
+    }
+    private void OnDisable()
+    {
+        EventHander.UpdateArticleUIEvent -= UpdateArticleUI;
+        EventHander.UpdateUiEvent -= UpdateStatusUI;
+        EventHander.UpdateMessageEvent -= UpdateMessage;
+        EventHander.UpdateBattleEvent -= ShowBattleUI;
+        EventHander.UpdateBattleUIEvent -= UpdateBattleUI;
+    }
+   
     public void Update()
     {
         CloseUI();
     }
-    // 更新UI設定
-    // 更新Canvas顯示
     public void UpdateStatusUI(PeopleInfo peopleInfo)
     {
-        //FloorText.text = $"{peopleInfo.currentFloor} 樓";
         UIStatesText.LvText.text = $"等級:{peopleInfo.lvevl}";
         UIStatesText.HpText.text = $"生命: {peopleInfo.hp}";
         UIStatesText.AttackPowerText.text = $"攻擊力: {peopleInfo.attackPower}";
         UIStatesText.DefenseText.text = $"防禦力: {peopleInfo.defense}";
         UIStatesText.AgileText.text = $"敏捷: {peopleInfo.agile}";
         UIStatesText.Experience_ValueText.text = $"經驗: {peopleInfo.experience_Value}";
-        UIStatesText.YellowKey_Text.text = $" {peopleInfo.yellowKey}";
-        UIStatesText.BlueKeyText.text = $" {peopleInfo.blueKey}";
-        UIStatesText.RedKeyText.text = $" {peopleInfo.redKey}";
-        UIStatesText.MoneyText.text = $" {peopleInfo.magicMoney}";
-        //UIStatesText.FloorText.text = $" {peopleInfo.currentFloor}";
     }
-
-    public void UpdateMessage(string OtherText)
+    //更新鑰匙、錢資訊
+    public void UpdateArticleUI(Article article, ArticleDetail articleDetail)
+    {
+        //更新Key money UI
+        switch (article)
+        {
+            case Article.YellowKey:
+                UIStatesText.YellowKey_Text.text = $"" + articleDetail.Count + "";
+                break;
+            case Article.BlueKey:
+                UIStatesText.BlueKeyText.text = $"" + articleDetail.Count + "";
+                break;
+            case Article.RedKey:
+                UIStatesText.RedKeyText.text = $"" + articleDetail.Count + "";
+                break;
+            case Article.MegicMoney:
+                UIStatesText.MoneyText.text = $"" + articleDetail.Count + "";
+                break;
+        }
+    }
+    
+    // 更新 獲得UI訊息
+    public void UpdateMessage(string message)
     {
         // 顯示UI 為True
         isUIVisible = true;
-        itemImage.SetActive(isUIVisible);
+        GetImage.SetActive(isUIVisible);
         itemDescriptionText.SetActive(isUIVisible);
-        UIStatesText.GetMessage.text = OtherText;
+        UIStatesText.GetMessage.text = message;
+        //關閉腳色移動
+        _Characters.SetCanMove(!isUIVisible);
     }
-
-    public static void UpdateBattleUI(Characters characters, Monster monster, UIManager uIManager)
-    {
-
-        // Update Text
-        uIManager.UIStatesText.BattleCh_Hp.text = $"生命 :{characters.HP}";
-        uIManager.UIStatesText.BattleCh_Attack.text = $"攻擊力 : {characters.AttackPower}";
-        uIManager.UIStatesText.BattleCh_Den.text = $"防禦力 : {characters.Defense}";
-        uIManager.UIStatesText.BattleCh_Aglie.text = $"敏捷 : {characters.Agile}";
-        uIManager.UIStatesText.BattleM_Hp.text = $"生命 : {monster.HP}";
-        uIManager.UIStatesText.BattleM_Attack.text = $"攻擊力 : {monster.AttackPower}";
-        uIManager.UIStatesText.BattleM_Den.text = $"防禦力 : {monster.Defense}";
-        uIManager.UIStatesText.BattleM_Aglie.text = $"敏捷 : {monster.Agile}";
-
-    }
-
+    //開啟 Battle Ui
     public void ShowBattleUI()
     {
         isUiBallteState = !isUiBallteState;
+        _Characters.SetCanMove(isUiBallteState);
         uiBattleBackGrand.SetActive(isUiBallteState);
     }
+    //更新BattleUI
+    public void UpdateBattleUI(PeopleInfo Ch, Monster monster)
+    {
+
+        // Update Text
+        UIStatesText.BattleCh_Name.text = $"英      雄";
+        UIStatesText.BattleCh_Hp.text = $"生命 :{Ch.hp}";
+        UIStatesText.BattleCh_Attack.text = $"攻擊力 : {Ch.attackPower}";
+        UIStatesText.BattleCh_Den.text = $"防禦力 : {Ch.defense}";
+        UIStatesText.BattleCh_Aglie.text = $"敏捷 : {Ch.agile}";
+
+
+        //UIStatesText.BattleM_Image.sprite = monster.m
+        UIStatesText.BattleM_Name.text = $" {monster.name} ";
+        UIStatesText.BattleM_Hp.text = $"生命 : {monster.HP}";
+        UIStatesText.BattleM_Attack.text = $"攻擊力 : {monster.AttackPower}";
+        UIStatesText.BattleM_Den.text = $"防禦力 : {monster.Defense}";
+        UIStatesText.BattleM_Aglie.text = $"敏捷 : {monster.Agile}";
+    }
+
+
+    public void ShowFloor(int Floor)
+    {
+        UIStatesText.FloorText.text = $"{Floor}樓";
+    }
+
 
     void CloseUI()
     {
@@ -81,7 +132,7 @@ public class UIManager : MonoBehaviour
             {
                 //切換成false 下面才會更動
                 isUIVisible = !isUIVisible;
-                itemImage.SetActive(isUIVisible);
+                GetImage.SetActive(isUIVisible);
                 itemDescriptionText.SetActive(isUIVisible);
                 _Characters.SetCanMove(true);
             }
@@ -92,7 +143,10 @@ public class UIManager : MonoBehaviour
                 isUiBallteState = !isUiBallteState;
                 uiBattleBackGrand.SetActive(isUiBallteState);
                 _Characters.SetCanMove(true);
+                
             }
         }
     }
+
+   
 }

@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class InventoryManager : Singleton<InventoryManager>
+{
+  
+
+
+}
+
+public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+{
+    private static T instance;
+
+    public static T Instance => instance;
+
+    protected virtual void Awake()
+    {
+        if ((Object)instance != (Object)null)
+        {
+            Object.Destroy(base.gameObject);
+        }
+        else
+        {
+            instance = (T)this;
+        }
+    }
+}

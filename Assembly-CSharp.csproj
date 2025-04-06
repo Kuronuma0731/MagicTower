@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0C614966-3817-29A6-D9EA-DAB3C7FA513F}</ProjectGuid>
+    <ProjectGuid>{BDC47045-26B7-180D-0D4C-BD13C40BD6E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,28 +60,31 @@
   <ItemGroup>
     <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\StairsScript.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\Monster.cs" />
-    <Compile Include="Assets\Script\GameMain\Scene\Floor\FloorControl.cs" />
-    <Compile Include="Assets\Script\BattleScript.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\NumberValuePeoPle.cs" />
+    <Compile Include="Assets\Script\Control\Other\BattleManager.cs" />
+    <Compile Include="Assets\Script\Control\NPCManager\NPCManager.cs" />
+    <Compile Include="Assets\Script\GameUI\EventHander.cs" />
+    <Compile Include="Assets\Script\GameMain\OtherArticleMeanager.cs" />
+    <Compile Include="Assets\Script\Control\Other\KeyMeanager.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\PeopleInfo.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\People.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\OtherObjectScript.cs" />
+    <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\ItemName.cs" />
+    <Compile Include="Assets\Script\GameUI\UIInfo.cs" />
+    <Compile Include="Assets\Script\GameMain\Charaters\CharactersEvent.cs" />
+    <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\Item.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\Characters.cs" />
+    <Compile Include="Assets\Script\GameUI\Volume\VolumeControls.cs" />
     <Compile Include="Assets\PanAudio.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\MonsterNumericalValue.cs" />
     <Compile Include="Assets\Script\Control\GameManager.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\CamareControl.cs" />
+    <Compile Include="Assets\Script\Control\Other\CamareControl.cs" />
+    <Compile Include="Assets\Script\Control\Other\VoiceControl.cs" />
+    <Compile Include="Assets\Script\GameMain\Charaters\NPCScript\NPCControl.cs" />
     <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\DoorControl.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\MonsterNumericalValue.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\PeoplePlay.cs" />
+    <Compile Include="Assets\Script\Control\Other\MaskManager.cs" />
+    <Compile Include="Assets\Script\GameMain\InventoryManager.cs" />
     <Compile Include="Assets\Script\GameUI\UIManager.cs" />
     <Compile Include="Assets\Script\GameMain\Scene\Floor\ChangeFloor.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\PlayMonster.cs" />
-    <Compile Include="Assets\Script\Control\DetectObjects.cs" />
-    <Compile Include="Assets\Script\GameMain\Charaters\MonsterScript\備分舊資料\Peoples.cs" />
-    <Compile Include="Assets\Script\Control\Other\VoiceControl.cs" />
-    <Compile Include="Assets\Script\GameUI\VolumeControls.cs" />
-    <Compile Include="Assets\Script\GameUI\UIInfo.cs" />
+    <Compile Include="Assets\Script\GameMain\Charaters\OtherScript\MaskControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1102,7 +1105,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{4148815D-5464-597A-BE25-5F85B1B3135A}</Project>
+      <Project>{5A0B33E6-6041-715C-7AE7-0D8D1273EFB1}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>

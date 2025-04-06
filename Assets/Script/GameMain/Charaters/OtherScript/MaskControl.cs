@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NumberValuePeoPles 
+public class MaskControl : MonoBehaviour
 {
+    [SerializeField] private int floor;
     // Start is called before the first frame update
-    //public CreateCharacters () 
-    //{
-    //
-    //}
     //void Start()
     //{
     //    
@@ -19,4 +16,9 @@ public class NumberValuePeoPles
     //{
     //    
     //}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 }

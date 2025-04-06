@@ -127,14 +127,12 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: BlueMajician
+  MonsterName: 0
+  monsterSprite: {fileID: -1062344026, guid: ffdfaa25cd296b046894b84c0532124e, type: 3}
 --- !u!61 &1650774402410660709
 BoxCollider2D:
   m_ObjectHideFlags: 0

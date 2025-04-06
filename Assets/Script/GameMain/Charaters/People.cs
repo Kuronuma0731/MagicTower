@@ -53,23 +53,23 @@ public class People : MonoBehaviour
         set => peopleInfo.lvevl = value;
     }
 
-    public int YellowKey
-    {
-        get => peopleInfo.yellowKey;
-        set => peopleInfo.yellowKey = value;
-    }
-
-    public int BlueKey
-    {
-        get => peopleInfo.blueKey;
-        set => peopleInfo.blueKey = value;
-    }
-
-    public int RedKey
-    {
-        get => peopleInfo.redKey;
-        set => peopleInfo.redKey = value;
-    }
+    // public int YellowKey
+    // {
+    //     get => peopleInfo.yellowKey;
+    //     set => peopleInfo.yellowKey = value;
+    // }
+    //
+    // public int BlueKey
+    // {
+    //     get => peopleInfo.blueKey;
+    //     set => peopleInfo.blueKey = value;
+    // }
+    //
+    // public int RedKey
+    // {
+    //     get => peopleInfo.redKey;
+    //     set => peopleInfo.redKey = value;
+    // }
     public int MagicMoney
     {
         get => peopleInfo.magicMoney;
@@ -80,7 +80,7 @@ public class People : MonoBehaviour
         get => peopleInfo.peoplepositionStats;
         set => peopleInfo.peoplepositionStats = value;
     }
-    public int CurrentFloor 
+    public int CurrentFloor
     {
         get => peopleInfo.currentFloor;
         set => peopleInfo.currentFloor = value;

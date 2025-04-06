@@ -106,14 +106,12 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: Zombie
+  MonsterName: 0
+  monsterSprite: {fileID: 376812969, guid: c67cc927d49d6d8479c0ea3042001303, type: 3}
 --- !u!95 &1561602438519623490
 Animator:
   serializedVersion: 5

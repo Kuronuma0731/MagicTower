@@ -106,14 +106,12 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: YellowMajiician
+  MonsterName: 0
+  monsterSprite: {fileID: -1117023682, guid: ffdfaa25cd296b046894b84c0532124e, type: 3}
 --- !u!95 &301176439130563670
 Animator:
   serializedVersion: 5

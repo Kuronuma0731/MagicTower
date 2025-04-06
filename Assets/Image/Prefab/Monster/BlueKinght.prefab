@@ -153,11 +153,9 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: BlueKinght
+  MonsterName: 0
+  monsterSprite: {fileID: -1113955369, guid: ecd2a089548554044bd520b77d27e752, type: 3}

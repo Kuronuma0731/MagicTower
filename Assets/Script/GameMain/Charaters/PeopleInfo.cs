@@ -19,9 +19,6 @@ public class PeopleInfo
 
     //µ¥¯Å
     public int lvevl;
-    public int yellowKey;
-    public int blueKey;
-    public int redKey;
     public int magicMoney;
     //¼Ó¼h
     public int currentFloor;

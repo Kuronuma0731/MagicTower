@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8473424871779158395}
   - component: {fileID: 3459518827421281729}
-  - component: {fileID: 1900412491478601142}
   - component: {fileID: 4331225213080075909}
   - component: {fileID: 5556311430506180198}
-  m_Layer: 0
+  - component: {fileID: 4064673848008172112}
+  m_Layer: 8
   m_Name: BlueDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,33 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1900412491478601142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7931107326733641111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856f51771b7c9464f91399cb14a766da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  peopleInfo:
-    hp: 0
-    attackPower: 0
-    defense: 0
-    agile: 0
-    experience_Value: 0
-    lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
-    magicMoney: 0
-    currentFloor: 0
-    peoplepositionStats: {x: 0, y: 0, z: 0}
-  number_Of_Attacks: 0
-  Door_Animator: {fileID: 0}
 --- !u!95 &4331225213080075909
 Animator:
   serializedVersion: 5
@@ -159,5 +132,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.95, y: 0.95}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &4064673848008172112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7931107326733641111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd02039a00d779a4d810764ba5bcecfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  articleDoor: 1
+  doorAnimation: {fileID: 4331225213080075909}

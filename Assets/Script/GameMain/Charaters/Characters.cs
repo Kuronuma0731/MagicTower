@@ -1,14 +1,14 @@
 using System;
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 //步伐 x = 1 y = 1
 public class Characters : People
 {
     //
     [SerializeField] private UIManager uiMananger;
-
     //Control Animtor
-    [SerializeField] private Animation Character_Animation;
-
+    [SerializeField] private Animator Hero_Animator;
     // Change Floor  1f,2f,3f,4f,5f,
     //[SerializeField] private int currentFloor;  // 角色目前樓層，預設 1F
     [SerializeField] private Grid PeopleGrid; // 將場景中的 Grid 拖入這裡
@@ -18,24 +18,26 @@ public class Characters : People
     [SerializeField] private int Characters_Gold;
     [SerializeField] public LayerMask floorLayer; // 地e層
     [SerializeField] public LayerMask wallLayer;  // 牆壁層
-    [SerializeField] public LayerMask DoorLayer;  // 牆壁層
-
+    [SerializeField] public LayerMask DoorLayer;  // 門層
+    [SerializeField] public LayerMask NPCLayer;  // NPC層
+    KeyMeanager keyManager;
     //[SerializeField] private GameObject otherCharacters;
     [SerializeField] private Rigidbody2D RigidbodyCharacters;
 
 
     // Scenes Object get use 
     [SerializeField] private int _GetSceneIndex;
+    //當前位置紀錄
+    Vector2 currentPosition;
     private Vector2 moveDirection;
 
     // 樓梯狀態讀取
     private bool StairsStats = true;
     // 移動讀取
-    private bool canMove = true;
-    private Action<PeopleInfo> updateUI;
-
-    void Start()
+    [SerializeField] private bool canMove = true;
+    private void Awake()
     {
+        //腳色設定值
         Lv = 1;
         HP = 1000;
         AttackPower = 10;
@@ -43,36 +45,30 @@ public class Characters : People
         Agile = 2;
         Experience_Value = 0;
         Number_Of_Attacks = 1;
-        YellowKey = 1;
-        BlueKey = 1;
-        RedKey = 1;
-        MagicMoney = 0;
+        MagicMoney = 200;
         CurrentFloor = 0;
+    }
 
+    void Start()
+    {
+        Hero_Animator = GetComponent<Animator>();
+        // 禁止重力
         RigidbodyCharacters.freezeRotation = true;
-
+        //uiMananger.ShowFloor(CurrentFloor);
         if (MainCamera != null)
         {
             MainCamera.transform.position = new Vector3(0, 0, -10);
         }
 
-        //updateUI = peopleInfo =>Debug.Log("hi");
-        updateUI?.Invoke(peopleInfo);
-        Init(updateUI);
     }
 
-    public void Init(Action<PeopleInfo> updateUI)
-    {
-        this.updateUI = updateUI;
-    }
 
     private void Update()
     {
+       
         CharacterGridMove();
-        //updateUI?.Invoke(peopleInfo);
+
     }
-
-
     void CharacterGridMove()
     {
         if (!canMove) { return; }
@@ -85,7 +81,7 @@ public class Characters : People
 
 
         // 取得當前位置並確保其對齊格子（強制設定為 .5 或 1.5）
-        Vector2 currentPosition = transform.position;
+        currentPosition = transform.position;
 
         // 強制將 x 和 y 軸設為 .5 或 1.5
         float targetX = Mathf.Floor(currentPosition.x) + 0.5f;
@@ -95,51 +91,103 @@ public class Characters : People
         // 檢查下一步是否為地板且不是牆壁
         Vector2 targetPosition = new Vector2(targetX, targetY) + moveDirection;
         //Vector2 targetPosition = (Vector2)transform.position + moveDirection;
+        TryNPC(targetPosition);
         if (IsFloor(targetPosition) && !IsWall(targetPosition))
         {
-
-            if (IsDoor(targetPosition))
-            {
-                OnTriggerDoor(targetPosition);
-            }
-
-            StartCoroutine(MoveToNextGrid(targetPosition));
-
-            // 確定移動更改 StairsStats True
+            //判斷開門
+            TryOpenDoor(targetPosition);
             StairsStats = true;
         }
 
 
     }
-    public void OnTriggerDoor(Vector2 targetPosition)
+    private bool TryNPC(Vector2 targetPosition) 
     {
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, targetPosition, 0, DoorLayer);
-        Debug.Log(targetPosition);
-        //if (hits != null)
-        //{
-        //Debug.Log($"物件 {hits[0].gameObject.name} 在矩形範圍內！");
-        foreach (var hit in hits)
+        Collider2D doorCollider = Physics2D.OverlapPoint(targetPosition, NPCLayer);
+        if (doorCollider != null)
         {
-            Debug.Log($"物件 {hit.gameObject.name} 在矩形範圍內！");
-            if (hit.gameObject.name == "YellowDoor" || hit.gameObject.name == "BlueDoor" || hit.gameObject.name == "RedDoor")
-            {
-                Debug.Log($"物件 {hit.gameObject.name} 在矩形範圍內！");
-                DoorControl doorControl = hit.GetComponent<DoorControl>();
-            }
-
+            Debug.Log("有資料)");
         }
+        else 
+        {
+            Debug.Log("沒有資料)");
+        }
+        return true;
     }
-    private System.Collections.IEnumerator MoveToNextGrid(Vector2 targetPosition)
+    // 嘗試開門 
+    private bool TryOpenDoor(Vector2 targetPosition)
     {
+        keyManager = GameObject.Find("KeyMeanager").GetComponent<KeyMeanager>();
+        Collider2D doorCollider = Physics2D.OverlapPoint(targetPosition, DoorLayer);
+        if (doorCollider)
+        {
+            DoorControl doorControl = doorCollider.GetComponent<DoorControl>();
+            if (doorControl)
+            {
+                Article doorArticle = doorControl.articleDoor;
+                bool canOpen = keyManager.DeleteArticle(doorArticle);
+                if (canOpen)
+                {
+                    // 開啟門動畫
+                    doorControl.doorAnimation?.SetBool("OpenDoor", true);
+                    StartCoroutine(MoveToNextGrid(targetPosition, moveDirection));
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        else 
+        {
+            StartCoroutine(MoveToNextGrid(targetPosition, moveDirection));
+        }
+            // 若沒找到門，則返回 true 代表可以移動
+            return true;
+    }
+    private System.Collections.IEnumerator MoveToNextGrid(Vector2 targetPosition, Vector2 moveDirection)
+    {
+        if (moveDirection == Vector2.up)
+        {
+            Hero_Animator.SetBool("PlayTop", true);
+            Hero_Animator.SetBool("PlayLeft", false);
+            Hero_Animator.SetBool("PlayRight", false);
+            Hero_Animator.SetBool("PlayDown", false);
+        }
+        else if (moveDirection == Vector2.left)
+        {
+            Hero_Animator.SetBool("PlayTop", false);
+            Hero_Animator.SetBool("PlayLeft", true);
+            Hero_Animator.SetBool("PlayRight", false);
+            Hero_Animator.SetBool("PlayDown", false);
+        }
+        else if (moveDirection == Vector2.right)
+        {
+            Hero_Animator.SetBool("PlayTop", false);
+            Hero_Animator.SetBool("PlayLeft", false);
+            Hero_Animator.SetBool("PlayRight", true);
+            Hero_Animator.SetBool("PlayDown", false);
+        }
+
+        else if (moveDirection == Vector2.down)
+        {
+            Hero_Animator.SetBool("PlayTop", false);
+            Hero_Animator.SetBool("PlayLeft", false);
+            Hero_Animator.SetBool("PlayRight", false);
+            Hero_Animator.SetBool("PlayDown", true);
+        }
+
         transform.position = targetPosition;
+
         //紀錄 當下位置
         Vector3Int cellPosition = PeopleGrid.WorldToCell(transform.position);
         Vector3 worldPosition = PeopleGrid.CellToWorld(cellPosition);
         PeoplepositionStats = worldPosition;
-        Debug.Log(PeoplepositionStats);
-        yield return null;
-    }
 
+        yield return new WaitForSeconds(0.1f);
+    }
+    
 
     // 檢查是否在 Floor 範圍內
     private bool IsFloor(Vector2 targetPosition)
@@ -154,20 +202,10 @@ public class Characters : People
         return wallCheck != null;
     }
 
-    private bool IsDoor(Vector2 targetPosition)
-    {
-        Collider2D DoorCheck = Physics2D.OverlapPoint(targetPosition, DoorLayer);
-        return DoorCheck != null;
-    }
-
-
     private void OnTriggerEnter2D(Collider2D _Tag)
     {
-        //Debug.Log(_Tag.tag);
-        //Debug.Log(_Tag.name);
         try
         {
-            //Debug.Log("Monster");
             if (_Tag.gameObject.tag == "Stairs")
             {
                 switch (_Tag.gameObject.name)
@@ -178,6 +216,7 @@ public class Characters : People
                         {
                             CurrentFloor = CurrentFloor + 1;
                             StairsStats = ChangeFloor.SetFloorStats(CurrentFloor, MainCamera, _Tag, gameObject, FloorGameObject, "GoDownStairs", wallLayer);
+                            uiMananger.ShowFloor(CurrentFloor);
                         }
                         break;
                     case "GoDownStairs":
@@ -185,6 +224,7 @@ public class Characters : People
                         {
                             CurrentFloor = CurrentFloor - 1;
                             StairsStats = ChangeFloor.SetFloorStats(CurrentFloor, MainCamera, _Tag, gameObject, FloorGameObject, "GoUpStairs", wallLayer);
+                            uiMananger.ShowFloor(CurrentFloor);
                         }
                         break;
                     default:
@@ -194,25 +234,17 @@ public class Characters : People
             }
             else if (_Tag.gameObject.tag == "Monster")
             {
+                BattleManager battleManager = GameObject.Find("BattleManager").GetComponent<BattleManager>();
                 Monster monster = _Tag.GetComponent<Monster>();
-                uiMananger.ShowBattleUI();
-                SetCanMove(false);
-                BattleScript.StartBattle(this, monster, uiMananger);
+                EventHander.CallUpdateBattleEvent();
+                battleManager?.StartBattle(this, monster);
 
             }
-            else
+            else if (_Tag.gameObject.name == "BlueMask")
             {
-                // 除了樓梯跟怪物以外的物件
-                string OtherText = OtherObjectScript.GetOther(_Tag.gameObject, gameObject);
-                SetCanMove(false);
-                if (OtherText != null && OtherText != "")
-                {
-                    uiMananger.UpdateMessage(OtherText);
-                }
-                Destroy(_Tag.gameObject);
+                //
+                //uiMananger.ShowSkillUi(1);
             }
-
-            updateUI?.Invoke(peopleInfo);
         }
         catch (Exception e)
         {
@@ -223,15 +255,14 @@ public class Characters : People
 
     }
 
-
     // 設定是否可以動作
     public void SetCanMove(bool Move)
     {
         canMove = Move;
-        Debug.Log(canMove);
     }
 
 
+    
 
 
 

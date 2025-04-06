@@ -12,12 +12,13 @@ public class VolumeControls : MonoBehaviour
     [SerializeField] private Characters Characters;
     [SerializeField] private Button buttonEvent;
 
+    //點擊時無法移動
     private bool canMove = true;
     // Update is called once per frame
 
     private void Start()
     {
-        volumeImage.gameObject.SetActive(!volumeImage.gameObject.activeSelf);
+        //volumeImage.gameObject.SetActive(!volumeImage.gameObject.activeSelf);
         // Set up 
         volumSlider.value = AudioListener.volume;
         volumeText.text = $"音量: 100 % ";

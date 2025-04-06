@@ -153,11 +153,9 @@ MonoBehaviour:
     agile: 0
     experience_Value: 0
     lvevl: 0
-    yellowKey: 0
-    blueKey: 0
-    redKey: 0
     magicMoney: 0
     currentFloor: 0
     peoplepositionStats: {x: 0, y: 0, z: 0}
   number_Of_Attacks: 0
-  MonsterName: SwordMan
+  MonsterName: 0
+  monsterSprite: {fileID: -1025110262, guid: b4350a209021e3e418ea2fd33a934e6d, type: 3}
