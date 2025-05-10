@@ -16,13 +16,14 @@ public class DoorControl : People
 
     private void Update()
     {
-        if (Door_Animator != null)
-        {
-            if (Input.GetKeyDown(KeyCode.O)) 
-            {
-                Door_Animator.SetTrigger("Open");
-            }
-        }
+        // Test OpenDoor
+        //if (Door_Animator != null)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.O)) 
+        //    {
+        //        Door_Animator.SetTrigger("Open");
+        //    }
+        //}
     }
     //void ont
     public override void CloseObject(string ObjectName, Characters _Characters)

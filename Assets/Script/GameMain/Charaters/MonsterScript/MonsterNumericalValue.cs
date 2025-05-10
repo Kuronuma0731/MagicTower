@@ -9,7 +9,7 @@ public static class MonsterNumericalValue
         {
 
             //Slime
-            { "GreenSlime", (45, 10, 2, 1, 1, 1,1) },
+            { "GreenSlime", (45, 18, 1, 1, 1, 1,1) },
             { "RedSlime", (66, 20, 4, 2, 1, 1,2) },
             { "BlackSlime", (80, 37, 9, 0, 1, 1,5) },
             { "SlimeKing", (172, 130, 60, 2, 2, 1,19) },

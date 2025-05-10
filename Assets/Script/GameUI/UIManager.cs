@@ -16,7 +16,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text BlueKeyText; // Text 上的數據顯示
     [SerializeField] private Text RedKeyText; // Text 上的數據顯示
     [SerializeField] private Text MoneyText; // Text 上的數據顯示
+    [SerializeField] private Text GetMessage; // Text 上的數據顯示
 
+    [SerializeField] private GameObject itemImage;
+    [SerializeField] private GameObject itemDescriptionText;
+
+    private bool isUIVisible = false; // 控制 UI 顯示與隱藏的狀態
+
+
+    public void Update()
+    {
+        CloseUI();
+    }
     // 更新UI設定
     // 更新Canvas顯示
     public void UpdateStatusUI(PeopleInfo peopleInfo)
@@ -33,5 +44,32 @@ public class UIManager : MonoBehaviour
         RedKeyText.text = $" {peopleInfo.redKey}";
         MoneyText.text = $" {peopleInfo.magicMoney}";
         FloorText.text = $" {peopleInfo.currentFloor}";
+    }
+
+    public void UpdateMessage(string OtherText)
+    {
+        // 顯示UI 為True
+        isUIVisible = true;
+        itemImage.SetActive(isUIVisible);
+        itemDescriptionText.SetActive(isUIVisible);
+        GetMessage.text = OtherText;
+    }
+
+    void CloseUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))//Input Enter
+        {
+            //Debug.Log(isUIVisible);
+            // isUIVisible 已開啟所以關閉
+            if (isUIVisible == true)
+            {
+                //切換成false 下面才會更動
+                isUIVisible = !isUIVisible;
+                itemImage.SetActive(isUIVisible);
+                itemDescriptionText.SetActive(isUIVisible);
+                
+               
+            }
+        }
     }
 }
